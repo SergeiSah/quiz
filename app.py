@@ -4,13 +4,9 @@ from werkzeug.security import check_password_hash
 from src.models import db, User, Progress, Result
 from src.utils import load_json
 from src.configs import DBConfig, CODES_INFO, SECRET_KEY
-from datetime import timedelta
 
 app = Flask(__name__)
 app.secret_key = SECRET_KEY
-# app.config['SQLALCHEMY_DATABASE_URI'] = QUIZ_DB_URI
-# app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-# app.permanent_session_lifetime = timedelta(days=7)
 app.config.from_object(DBConfig)
 
 db.init_app(app)
