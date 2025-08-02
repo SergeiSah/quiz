@@ -1,0 +1,47 @@
+{
+  "5": [
+      {
+        "top": "10",
+        "side": "right",
+        "offset": "2",
+        "rotate": "-8"
+      },
+      {
+        "top": "43",
+        "side": "right",
+        "offset": "4",
+        "rotate": "15"
+      },
+      {
+        "top": "65",
+        "side": "right",
+        "offset": "15",
+        "rotate": "2"
+      },
+      {
+        "top": "63",
+        "side": "right",
+        "offset": "28",
+        "rotate": "-20"
+      },
+      {
+        "top": "35",
+        "side": "right",
+        "offset": "18",
+        "rotate": "-5"
+      },
+      {
+        "top": "55",
+        "side": "right",
+        "offset": "40",
+        "rotate": "15"
+      },
+      {
+        "top": "67",
+        "side": "right",
+        "offset": "50",
+        "rotate": "7"
+      }
+
+    ]
+}

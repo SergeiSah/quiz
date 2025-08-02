@@ -1,0 +1,179 @@
+body {
+  background-color: #fdf6f0;
+  font-family: 'Georgia', serif;
+  color: #4d2f2f;
+  padding: 2rem;
+  min-height: 100vh;
+}
+
+.login-form {
+  width: 100%;
+  max-width: 400px;
+  opacity: 90%;
+  color: #4d2f2f;
+}
+
+.login-btn {
+  background-color: #4d2f2f;
+  border: #4d2f2f;
+}
+
+.login-btn:hover {
+  background-color: #814646;
+}
+
+/* Центрируем всё по вертикали и горизонтали */
+.container {
+  min-height: 60vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.intro-container {
+  max-width: 1000px;
+  margin: auto;
+  padding: 2rem 3rem;
+  text-align: center;
+  background-color: rgba(255, 255, 255, 0.85);
+  border-radius: 2%;
+  /*opacity: 85%;*/
+}
+
+.intro-container h1 {
+  font-size: 4rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  color: #2c2c2c;
+}
+
+.intro-container p {
+  font-size: 2rem;
+  line-height: 1.8;
+  color: #444;
+  margin-bottom: 2rem;
+  text-align: justify;
+}
+
+.start-btn {
+  border-radius: 12px;
+  padding: 12px 20px;
+  font-size: clamp(20px, 3vw, 36px) !important;
+  box-shadow: 1px 4px 8px rgba(0,0,0,0.2);
+  transition: transform 0.1s ease, box-shadow 0.2s ease;
+  background-color: rgba(255, 255, 255, 0.95);
+  /*opacity: 100%;*/
+}
+
+.start-btn:hover {
+  transform: scale(1.02);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.25);
+  background-color: rgba(255, 255, 255, 0.95);
+}
+
+/* Вопрос — крупнее и с отступами */
+.question-box {
+  margin-bottom: 30px;
+  /*background-color: rgba(255, 255, 255, 0.85);*/
+  padding: 20px 30px;
+  /*border-radius: 20px;*/
+  /*box-shadow: 0 4px 12px rgba(0,0,0,0.15);*/
+  max-width: 90%;
+}
+
+.question-text {
+  font-size: clamp(20px, 3vw, 54px);
+  font-weight: 600;
+  text-align: center;
+}
+
+.answer-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(140px, 1fr));
+  gap: 25px 40px;
+  max-width: 600px;
+  width: 100%;
+  padding: 0 20px;
+}
+
+/* Кнопки ответов */
+.answer-btn {
+  /*background: linear-gradient(135deg, #bbe8e8, #72f6e2);*/
+  /*color: white;*/
+  /*border: none;*/
+  border-radius: 12px;
+  padding: 12px 20px;
+  font-size: clamp(16px, 3vw, 36px) !important;
+  box-shadow: 1px 4px 8px rgba(0,0,0,0.2);
+  transition: transform 0.1s ease, box-shadow 0.2s ease;
+}
+
+.answer-btn:hover {
+  transform: scale(1.02);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.25);
+}
+
+.answer-btn:active {
+  transform: scale(0.98);
+}
+
+/* Явно разрешаем Bootstrap-классы работать поверх */
+.answer-btn.btn-success {
+  background-color: #28c76f !important; /* более яркий зелёный */
+  color: white !important;
+  border: none !important;
+  opacity: 1 !important;       /* полностью непрозрачная */
+  /*filter: brightness(1.05);     !* делает цвет визуально насыщеннее *!*/
+  /*box-shadow: 0 0 10px rgba(40, 199, 111, 0.6);*/
+}
+
+.answer-btn.btn-danger {
+  background-color: #dc3545 !important; /* Bootstrap red */
+  color: white !important;
+}
+
+.answer-btn {
+  transition: background-color 0.4s ease;
+}
+
+.polaroid {
+  width: 15%;
+  /*width:clamp(128px, 450px, 450px);*/
+  background: #fff;
+  padding: 0.35%;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  border-radius: 10px;
+}
+
+.polaroid img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 4px;
+}
+
+.complete-info {
+  font-size: 3rem;
+  text-align: center;
+  background-color: rgba(255, 255, 255, 0.75);
+  padding: 2rem 3rem;
+  border-radius: 12px;
+}
+
+@media (max-width: 768px) {
+  .polaroid {
+    display: none;
+  }
+  .answer-grid {
+    grid-template-columns: repeat(1, minmax(140px, 1fr))
+  }
+  .intro-container h1 {
+    font-size: 3rem;
+  }
+  .intro-container p {
+    font-size: 2rem;
+  }
+  .complete-info {
+    font-size: 5rem !important;
+  }
+}

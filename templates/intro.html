@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Добро пожаловать</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="bg-light d-flex align-items-center justify-content-center"
+      style="height: 100vh;
+             background-image: url('static/images/intro/background.jpg');
+             background-size: cover;
+             background-position: center;)">
+
+  <div class="intro-container">
+    <h1 class="mb-4">Привет!</h1>
+    <p class="mb-5">
+      Сегодня особенный день — 5 лет со дня начала нашей официальной семейной жизни. Вроде бы немного, но за это время произошло столько важного, тёплого и настоящего.
+      Мы прошли вместе множество разных этапов, и теперь хотим немного поностальгировать — и проверить, насколько хорошо вы помните моменты и детали нашей истории.
+      Перед вами — небольшая викторина. Отвечайте на вопросы, вспоминайте, улыбайтесь. В конце вас ждёт небольшой, но очень важный сюрприз 😊<br><br>
+      Готовы? Поехали!
+    </p>
+    <a href="{{ url_for('question', question_number=1) }}" class="btn start-btn">Начать</a>
+  </div>
+
+
+  {% include "logout.html" %}
+
+</body>
+</html>
