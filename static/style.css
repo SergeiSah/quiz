@@ -2,7 +2,6 @@ body {
   background-color: #fdf6f0;
   font-family: 'Georgia', serif;
   color: #873d3d;
-  padding: 2rem;
   min-height: 100vh;
 }
 
@@ -86,6 +85,7 @@ body {
   font-size: clamp(20px, 3vw, 54px);
   font-weight: 600;
   text-align: center;
+  text-shadow: 1px 1px 0px rgba(0,0,0,0.5);
 }
 
 .answer-grid {
