@@ -165,7 +165,8 @@ body {
     display: none;
   }
   .answer-grid {
-    grid-template-columns: repeat(1, minmax(140px, 1fr))
+    grid-template-columns: repeat(1, minmax(140px, 1fr));
+    max-width: 335px;
   }
   .intro-container h1 {
     font-size: 3rem;
