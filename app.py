@@ -190,7 +190,7 @@ def restart():
 
     user_id = session["user_id"]
     Progress.query.filter_by(user_id=user_id).delete()
-    Result.query.filter_by(user_id=user_id).delete()
+    # Result.query.filter_by(user_id=user_id).delete()
     db.session.commit()
     return redirect(url_for("question", question_number=1))
 
