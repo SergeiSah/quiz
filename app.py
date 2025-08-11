@@ -1,7 +1,7 @@
 import os
 from flask import Flask, render_template, request, redirect, url_for, session, jsonify
 from werkzeug.security import check_password_hash
-from src.models import db, User, Progress, Result
+from src.models import db, User, Progress, Result, Attempt
 from src.utils import load_json
 from src.configs import DBConfig, CODES_INFO, SECRET_KEY
 
@@ -174,13 +174,23 @@ def complete():
     else:
         code = int(result.result_code)
 
+    total_questions = len(question_text)
+    errors = Progress.query.filter_by(user_id=user_id, is_correct=False).count()
+
     img_dir = 'images/complete'
     if code in CODES_INFO:
         background = f'{img_dir}/background_v1.jpg'
     else:
         background = f'{img_dir}/background_v2.jpg'
 
-    return render_template("complete.html", result_code=code, codes_info=CODES_INFO, background=background)
+    return render_template(
+        "complete.html",
+        result_code=code,
+        codes_info=CODES_INFO,
+        background=background,
+        errors=errors,
+        total_questions=total_questions
+    )
 
 
 @app.route("/restart", methods=["POST"])
@@ -207,7 +217,6 @@ def answer():
     is_correct = chosen == correct
     user_id = session["user_id"]
 
-    # Сохраняем попытку
     db.session.add(Progress(
         user_id=user_id,
         question_number=question_number,
@@ -216,23 +225,56 @@ def answer():
     ))
     db.session.commit()
 
+    # Если это последний вопрос и ответ верный — фиксируем попытку
     if is_correct and question_number == len(question_text):
-        result = Result.query.filter_by(user_id=user_id).first()
-        if result:
-            return jsonify({
-                "status": "correct",
-                "completed": True,
-                "code": result.result_code
-            })
-        else:
-            return jsonify({
-                "status": "correct",
-                "completed": True,
-                "code": 0
-            })
+        result = Result.query.filter_by(user_id=user_id).order_by(Result.created_at.desc()).first()
+        code = int(result.result_code) if result else 0
+
+        total_questions = len(question_text)
+        errors = Progress.query.filter_by(user_id=user_id, is_correct=False).count()
+
+        db.session.add(Attempt(
+            user_id=user_id,
+            total_questions=total_questions,
+            errors=errors,
+        ))
+        db.session.commit()
+
+        return jsonify({
+            "status": "correct",
+            "completed": True,
+            "code": code
+        })
 
     return jsonify({"status": "correct" if is_correct else "wrong"})
 
+
+@app.route("/stats/recent")
+def stats_recent():
+    app.logger.info("HIT /stats/recent")
+    if "user_id" not in session:
+        return jsonify({"error":"unauthorized"}), 403
+    try:
+        limit = int(request.args.get("limit", 20))
+        limit = max(1, min(limit, 100))
+        rows = (
+            db.session.query(Attempt, User.username)
+            .join(User, Attempt.user_id == User.id)
+            .order_by(Attempt.created_at.desc())
+            .limit(limit)
+            .all()
+        )
+        items = [{
+            "username": username,
+            "created_at": attempt.created_at.strftime("%Y-%m-%d %H:%M:%S"),
+            "errors": attempt.errors,
+            "total": attempt.total_questions,
+        } for attempt, username in rows]
+        return jsonify({"items": items})
+    except Exception as e:
+        app.logger.exception("stats_recent failed")
+        # вернём явный JSON, чтобы фронт не споткнулся о HTML
+        return jsonify({"error": "server_error", "detail": str(e)}), 500
 
 if __name__ == "__main__":
     with app.app_context():

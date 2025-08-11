@@ -107,6 +107,7 @@ body {
   font-size: clamp(16px, 3vw, 36px) !important;
   box-shadow: 1px 4px 8px rgba(0,0,0,0.2);
   transition: transform 0.1s ease, box-shadow 0.2s ease;
+  /*transition: background-color 0.4s ease;*/
 }
 
 .answer-btn:hover {
@@ -133,8 +134,8 @@ body {
   color: white !important;
 }
 
-.answer-btn {
-  transition: background-color 0.4s ease;
+.logout-btn, .statistic_btn, .again_btn {
+  font-size: clamp(16px, 3vw, 36px) !important;
 }
 
 .polaroid {
@@ -175,6 +176,47 @@ body {
     font-size: 2rem;
   }
   .complete-info {
-    font-size: 5rem !important;
+    font-size: 6rem !important;
+  }
+}
+
+.complete-info h1 {
+  font-size: clamp(2.5rem, 6vw, 6rem) !important;
+  line-height: 1.1;
+  margin-bottom: 1rem; /* вместо .mb-4 при желании */
+}
+
+/* Код (перебиваем .display-4) */
+.complete-info .display-4 {
+  font-size: clamp(3rem, 8vw, 7rem) !important;
+  line-height: 1.05;
+  font-weight: 800;
+}
+
+/* Подписи/статы (перебиваем .h5/.h6) */
+.complete-info .h5,
+.complete-info .h6,
+.complete-info p {
+  font-size: clamp(1rem, 2.5vw, 1.75rem) !important;
+}
+
+/* На очень маленьких экранах можно чуть уменьшить, чтобы не ломало верстку */
+@media (max-width: 575.98px) {
+  .complete-info h1 { font-size: clamp(2rem, 8vw, 4rem) !important; }
+  .complete-info .display-4 { font-size: clamp(2.5rem, 10vw, 5rem) !important; }
+}
+
+@media (min-width: 576px) and (max-width: 991.98px) {
+  .modal-dialog {
+    --bs-modal-width: 720px;   /* было 500px по умолчанию */
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+/* На совсем маленьких можно убрать поля, чтобы почти во всю ширину */
+@media (max-width: 575.98px) {
+  .modal-dialog {
+    margin: 0.25rem; /* поменьше отступы от краёв */
   }
 }

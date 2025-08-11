@@ -26,3 +26,12 @@ class Result(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     result_code = db.Column(db.String(10), nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.now())
+
+class Attempt(db.Model):
+    __tablename__ = "attempts"
+
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey("user.id"), index=True, nullable=False)
+    total_questions = db.Column(db.Integer, nullable=False)
+    errors = db.Column(db.Integer, nullable=False)
+    created_at = db.Column(db.DateTime, server_default=db.func.now(), nullable=False)
