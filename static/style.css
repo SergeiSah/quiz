@@ -2,7 +2,7 @@ body {
   background-color: #fdf6f0;
   font-family: 'Georgia', serif;
   color: #873d3d;
-  min-height: 100vh;
+  height: 100dvh;
   background-size: cover;
 }
 
