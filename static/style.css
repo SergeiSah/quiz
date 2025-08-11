@@ -3,6 +3,7 @@ body {
   font-family: 'Georgia', serif;
   color: #873d3d;
   min-height: 100vh;
+  background-size: cover;
 }
 
 .login-form {
